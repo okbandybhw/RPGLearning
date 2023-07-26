@@ -2,17 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterData : MonoBehaviour
+namespace CharacterData
 {
-    // Start is called before the first frame update
-    void Start()
+    public enum AttributeType
     {
-        
+        Strength,
+        Dexterity,
+        Intelligence,
     }
 
-    // Update is called once per frame
-    void Update()
+    public class CharacterData
     {
-        
+        public List<Attribute> attributeValues;
+    }
+
+    public class Attribute
+    {
+        public AttributeType attributeType;
+        public float attributeValue;
+
+        public Attribute(AttributeType attributeType, float attributeValue = 0f)
+        {
+            this.attributeType = attributeType;
+            this.attributeValue = attributeValue;
+        }
     }
 }
