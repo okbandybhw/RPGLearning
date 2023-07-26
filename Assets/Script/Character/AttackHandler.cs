@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GameData;
 
 public class AttackHandler : MonoBehaviour
 {
@@ -9,11 +10,13 @@ public class AttackHandler : MonoBehaviour
     Animator animator;
     CharacterMovement characterMovement;
     InteractableObject target;
+    Character character;
 
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
         characterMovement = GetComponent<CharacterMovement>();
+        character = GetComponent<Character>();
     }
 
     public void Attack(InteractableObject target)
@@ -21,7 +24,6 @@ public class AttackHandler : MonoBehaviour
         if (target == null)
             return;
         this.target = target;
-
         ProcessAttack();
     }
 
@@ -33,10 +35,18 @@ public class AttackHandler : MonoBehaviour
 
     void ProcessAttack()
     {
+        if (target == null)
+            return;
+        var targetCharacter = target.GetComponent<Character>();
+        if (targetCharacter == null)
+            return;
+
         var distance = Vector3.Distance(transform.position, target.transform.position);
         if (distance <= attackRange)
         {
             animator.SetTrigger("Attack");
+            targetCharacter.TakeDamage(character.GetStatsValue(StatsType.Damage));
+
             target = null;
         }
         else

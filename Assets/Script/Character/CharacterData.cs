@@ -3,8 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CharacterData
+namespace GameData
 {
+    public enum CharacterType
+    {
+        Player,
+        Enemy
+    }
+
     public enum StatsType
     {
         Life,
@@ -47,8 +53,20 @@ namespace CharacterData
     {
         public List<Attribute> attributeValues;
         public List<Stats> StatsS;
+        //CharacterType characterType;
 
         public CharacterData()
+        {
+            Init();
+        }
+
+        public CharacterData(CharacterType characterType)
+        {
+            //this.characterType = characterType;
+            Init();
+        }
+
+        private void Init()
         {
             attributeValues = new List<Attribute>();
             foreach (AttributeType attributeType in Enum.GetValues(typeof(AttributeType)))
@@ -59,7 +77,7 @@ namespace CharacterData
             StatsS.Add(new Stats(StatsType.Damage, 20));
             StatsS.Add(new Stats(StatsType.Armor, 50));
             // foreach (StatsType statsType in Enum.GetValues(typeof(StatsType)))
-            //     StatsS.Add(new Stats(statsType));
+            //     StatsS.Add(new Stats(statsType));}
         }
     }
 }

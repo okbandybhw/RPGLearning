@@ -1,26 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GameData;
 
-namespace CharacterData
+public class Character : MonoBehaviour
 {
-    public class Character : MonoBehaviour
+    CharacterData characterData;
+    //先放這邊之後移到characterData;
+    [SerializeField]
+    CharacterType characterType;
+
+    void Awake()
     {
-        CharacterData characterData;
+        characterData = new CharacterData();
+    }
 
-        void Awake()
-        {
-            characterData = new CharacterData();
-        }
-        void Start()
-        {
+    public int GetStatsValue(StatsType statsType)
+    {
+        return characterData.StatsS[(int)statsType].statsValue;
+    }
 
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
+    public void TakeDamage(int damage)
+    {
+        Debug.Log("take damage");
     }
 }
