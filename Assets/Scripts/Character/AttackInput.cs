@@ -20,7 +20,6 @@ public class AttackInput : MonoBehaviour
         {
             if (interactInput.hoveringOverObject != null)
             {
-
                 attackHandler.Attack(interactInput.hoveringOverObject);
             }
         }

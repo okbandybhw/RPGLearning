@@ -51,8 +51,8 @@ namespace GameData
 
     public class CharacterData
     {
-        public List<Attribute> attributeValues;
-        public List<Stats> StatsS;
+        private List<Attribute> attributeValues;
+        private List<Stats> StatsS;
         //CharacterType characterType;
 
         public CharacterData()
@@ -73,11 +73,26 @@ namespace GameData
                 attributeValues.Add(new Attribute(attributeType, 0));
 
             StatsS = new List<Stats>();
-            StatsS.Add(new Stats(StatsType.Life, 100));
+            StatsS.Add(new Stats(StatsType.Life, 50));
             StatsS.Add(new Stats(StatsType.Damage, 20));
-            StatsS.Add(new Stats(StatsType.Armor, 50));
+            StatsS.Add(new Stats(StatsType.Armor, 10));
             // foreach (StatsType statsType in Enum.GetValues(typeof(StatsType)))
             //     StatsS.Add(new Stats(statsType));}
+        }
+
+        public int GetStatsValue(StatsType statsType)
+        {
+            return StatsS[(int)statsType].statsValue;
+        }
+
+        private void UpdateStatsValue(StatsType statsType, int statsValue)
+        {
+            StatsS[(int)statsType].statsValue = statsValue;
+        }
+
+        public void UpdateLife(int life)
+        {
+            UpdateStatsValue(StatsType.Life, life);
         }
     }
 }

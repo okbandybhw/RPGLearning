@@ -25,6 +25,9 @@ public class InteractInput : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             var interactableObject = hit.transform.GetComponent<InteractableObject>();
+            if (interactableObject == null)
+                interactableObject = hit.transform.GetComponentInParent<InteractableObject>();
+
             if (interactableObject != null)
             {
                 hoveringOverObject = interactableObject;

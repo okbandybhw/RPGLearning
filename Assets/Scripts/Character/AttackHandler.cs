@@ -6,7 +6,7 @@ using GameData;
 public class AttackHandler : MonoBehaviour
 {
     [SerializeField]
-    float attackRange = 1f;
+    float attackRange = 2.3f;
     Animator animator;
     CharacterMovement characterMovement;
     InteractableObject target;
