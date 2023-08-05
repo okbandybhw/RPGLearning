@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class InteractInput : MonoBehaviour
 {
-    [SerializeField]
-    TMPro.TextMeshProUGUI textOnScreen;
     [HideInInspector]
     public InteractableObject hoveringOverObject;
+    Character hoveringOverCharacter;
+
+    [SerializeField] UIManager uiManager;
+
     void Update()
     {
         CheckInteractableObject();
@@ -24,20 +26,26 @@ public class InteractInput : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
-            var interactableObject = hit.transform.GetComponent<InteractableObject>();
-            if (interactableObject == null)
-                interactableObject = hit.transform.GetComponentInParent<InteractableObject>();
+            UpdateInteractableObject(hit);
+        }
+    }
 
-            if (interactableObject != null)
-            {
-                hoveringOverObject = interactableObject;
-                textOnScreen.text = interactableObject.transform.name;
-            }
-            else
-            {
-                hoveringOverObject = null;
-                textOnScreen.text = "";
-            }
+    private void UpdateInteractableObject(RaycastHit hit)
+    {
+        var interactableObject = hit.transform.GetComponent<InteractableObject>();
+        if (interactableObject == null)
+            interactableObject = hit.transform.GetComponentInParent<InteractableObject>();
+
+        if (interactableObject != null)
+        {
+            hoveringOverObject = interactableObject;
+            hoveringOverCharacter = hoveringOverObject.GetComponent<Character>();
+            uiManager.SetTargetCharacter(hoveringOverCharacter);
+        }
+        else
+        {
+            hoveringOverObject = null;
+            hoveringOverCharacter = null;
         }
     }
 }

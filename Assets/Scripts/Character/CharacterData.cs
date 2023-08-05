@@ -22,11 +22,13 @@ namespace GameData
     {
         public StatsType statsType;
         public int statsValue;
+        public int maxValue;
 
-        public Stats(StatsType statsType, int statsValue = 0)
+        public Stats(StatsType statsType, int statsValue = 0, int maxValue = 0)
         {
             this.statsType = statsType;
             this.statsValue = statsValue;
+            this.maxValue = maxValue;
         }
     }
 
@@ -73,7 +75,7 @@ namespace GameData
                 attributeValues.Add(new Attribute(attributeType, 0));
 
             StatsS = new List<Stats>();
-            StatsS.Add(new Stats(StatsType.Life, 50));
+            StatsS.Add(new Stats(StatsType.Life, 50, 50));
             StatsS.Add(new Stats(StatsType.Damage, 20));
             StatsS.Add(new Stats(StatsType.Armor, 10));
             // foreach (StatsType statsType in Enum.GetValues(typeof(StatsType)))
@@ -83,6 +85,11 @@ namespace GameData
         public int GetStatsValue(StatsType statsType)
         {
             return StatsS[(int)statsType].statsValue;
+        }
+
+        public int GetStatsMaxValue(StatsType statsType)
+        {
+            return StatsS[(int)statsType].maxValue;
         }
 
         private void UpdateStatsValue(StatsType statsType, int statsValue)

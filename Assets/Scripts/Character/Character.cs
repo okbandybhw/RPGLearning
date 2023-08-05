@@ -6,7 +6,7 @@ using GameData;
 public class Character : MonoBehaviour
 {
     CharacterData characterData;
-    //先放這邊之後移到characterData;
+    //嚙踝蕭嚙踝蕭o嚙賭之嚙賦移嚙踝蕭characterData;
     [SerializeField]
     CharacterType characterType;
     Animator animator;
@@ -20,6 +20,11 @@ public class Character : MonoBehaviour
     public int GetStatsValue(StatsType statsType)
     {
         return characterData.GetStatsValue(statsType);
+    }
+
+    public int GetStatsMaxValue(StatsType statsType)
+    {
+        return characterData.GetStatsMaxValue(statsType);
     }
 
     public void TakeDamage(int damage)
